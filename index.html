@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/styles.css">
+    <title>Catalogo de Productos</title>
+</head>
+
+
+<body>
+    <h1>Administrador de Productos</h1>
+
+    <div class="crear">
+        <h2 id="tituloProducto">Nuevo Producto</h2>
+        <form class="formulario" id="crearProductoForm" onsubmit="crearProducto(event)" enctype="multipart/form-data">
+            <input type="text" id="nombre" placeholder="Nombre" required>
+            <input type="text" id="descripcion" placeholder="Descripcion" required>
+            <input type="number" id="precio" placeholder="Precio" required>
+            <input type="text" id="marca" placeholder="Marca" required>
+            <input type="number" id="stock" placeholder="Stock" required>
+            <br>
+            <br>
+            <!-- <a href="subirFoto">Subir Foto</a> -->
+            <label for="foto">Subir Foto</label>
+            <input type="file" id="foto" name="foto" accept="image/*">
+
+            <br>
+            <button type="submit" class="btn btn-outline-primary">Crear Producto</button>
+        </form>
+    </div>
+
+    <div class="actualizar">
+        <h2 id="tituloActualizar">Actualizar Producto</h2>
+        <form class="formulario" id="actualizarProductoForm" onsubmit="actualizarProducto(event)">
+            <input type="text" id="idProducto" placeholder="ID del Producto" required>
+            <input type="text" id="nuevoNombre" placeholder="Nombre Actualizado">
+            <input type="text" id="nuevoDescripcion" placeholder="Descripcion Actualizados">
+            <input type="number" id="nuevoPrecio" placeholder="Precio Actualizado">
+            <input type="text" id="nuevoMarca" placeholder="Marca Actualizados">
+            <input type="number" id="nuevoStock" placeholder="Stock Actualizado">
+            <br>
+            <br>
+            <button type="submit" class="btn btn-outline-success">Actualizar Producto</button>
+        </form>
+    </div>
+
+    <div class="eliminar">
+        <h2 id="tituloEliminar">Eliminar Producto</h2>
+        <form class="formulario" id="borrarProductoForm" onsubmit="borrarProducto(event)">
+            <input type="text" id="idproductoBorrar" placeholder="ID del Producto a Eliminar" required>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-outline-danger">Eliminar Producto</button>
+        </form>
+        <br>
+    </div>
+
+    <div class="consultar">
+        <h2 id="tituloConsulta">Consulta Productos</h2>
+        <form id="getContactsForm">
+            <br>
+            <button class="btn btn-outline-warning" type="button" onclick="obtenerProductos()">Obtener
+                Productos</button>
+        </form>
+        <br>
+        <br>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        const baseUrl = 'http://localhost:3020/api/1.0/productos';
+
+        function obtenerProductos() {
+            fetch(baseUrl)
+                .then(response => response.json())
+                .then(data => {
+                    let salida = '<table width="60%" border="1"><thead> Lista de Productos Registrados</thead>'
+                    let listaProductos = [];
+                    listaProductos = data;
+                    listaProductos.forEach((producto) => {
+                    salida += `<tr><td>${producto.idProducto}</td><td>${producto.nombre}</td><td>${producto.descripcion}</td><td>${producto.precio}</td>
+                               <td>${producto.marca}</td><td>${producto.stock}</td><td><img src="${producto.foto}" alt="Imagen del Producto"></td></tr>`
+
+                    })
+                    salida += '</table>'
+                    document.getElementById('response').innerHTML = salida;
+                });
+        }
+
+        function crearProducto(event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append('nombre', document.getElementById('nombre').value);
+            formData.append('descripcion', document.getElementById('descripcion').value);
+            formData.append('precio', document.getElementById('precio').value);
+            formData.append('marca', document.getElementById('marca').value);
+            formData.append('stock', document.getElementById('stock').value);
+            formData.append('foto', document.getElementById('foto').files[0]);
+
+            fetch(baseUrl + '/nuevo', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('response').innerText = data;
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                });
+        }
+
+
+        function actualizarProducto(event) {
+            event.preventDefault();
+
+            const nuevoProducto = {
+                idProducto: document.getElementById('idProducto').value,
+                nombre: document.getElementById('nuevoNombre').value,
+                descripcion: document.getElementById('nuevoDescripcion').value,
+                precio: document.getElementById('nuevoPrecio').value,
+                marca: document.getElementById('nuevoMarca').value,
+                stock: document.getElementById('nuevoStock').value
+            };
+
+            fetch(`${baseUrl}` + '/modificar', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(nuevoProducto),
+            })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('response').innerText = data;
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                });
+        }
+
+        function borrarProducto(event) {
+            event.preventDefault();
+
+            const idProducto = document.getElementById('idproductoBorrar').value;
+
+            fetch(`${baseUrl}/${idProducto}`, {
+                method: 'DELETE',
+            })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('response').innerText = data;
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                });
+        }
+    </script>
+
+</body>
+
+</html>
