@@ -6,8 +6,7 @@ const productosRouter = express.Router();
 productosRouter.use(express.json());
 
 class Producto {
-    constructor(cod, nom, des, pre, mar, sto, foto) {
-        this.codigo = cod;
+    constructor(nom, des, pre, mar, sto, foto) {
         this.nombre = nom;
         this.descripcion = des;
         this.precio = pre;
@@ -93,15 +92,15 @@ productosRouter.put('/productos', (req, res) => {
 
 productosRouter.delete('/productos/:id', (req, res) => {
     let idProducto = req.params.id;
-    const sql = 'DELETE FROM productos where id=' + idProducto;
-    db.query(sql, (err, rows) => {
+    const sql = 'DELETE FROM productos WHERE idProducto = ?';
+    db.execute(sql, [idProducto], (err, results) => {
         if (err) {
-            console.error('Error al consultar la base de datos:', err);
+            console.error('Error al eliminar el producto:', err);
             res.send('Error interno del servidor.');
         } else {
             res.send('Se eliminó el producto cuyo id es ' + idProducto);
         }
     });
-})
+});
 
 module.exports = productosRouter;

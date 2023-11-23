@@ -81,7 +81,7 @@
                     let listaProductos = [];
                     listaProductos = data;
                     listaProductos.forEach((producto) => {
-                        salida += `<tr><td>${producto.id}</td><td>${producto.nombre}</td><td>${producto.descripcion}</td><td>${producto.precio}</td>
+                        salida += `<tr><td>${producto.idProducto}</td><td>${producto.nombre}</td><td>${producto.descripcion}</td><td>${producto.precio}</td>
                                <td>${producto.marca}</td><td>${producto.stock}</td><td><img src="${producto.foto_path}" alt="Imagen del Producto"></td></tr>`
                     })
                     salida += '</table>'
