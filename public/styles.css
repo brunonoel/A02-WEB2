@@ -1,116 +1,110 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background: url('fondo.jpg') fixed center;
-    background-size: cover;
-    
-  }
-
-h1{
-    text-align: center;
-    background-color: #ccc;
-    color: #333;
-    margin: 20px 350px 0px 350px;
-    
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-size: cover;
 }
 
-h2{
-    background-color: #ccc;
-    color: #333; 
-    margin-right: 170vh;
+h1 {
+  text-align: center;
+  background-color: white;
+  color: #333;
+  margin: 20px 350px 0px 350px;
 }
-  .container {
-    width: 80%;
-    margin: 50px auto;
-    background: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
-  }
-  
-/* Estilo para el enlace "Subir Foto" */
+
+h2 {
+  background-color: whitesmoke;
+  color: #333;
+  margin-right: 170vh;
+  width: max-content;
+}
+
+.container {
+  width: 80%;
+  margin: 50px auto;
+  background: whitesmoke;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
 .crear a[href="subirFoto"] {
-    background-color: #4CAF50; 
-    color: white; 
-    padding: 10px 15px; 
-    text-decoration: none; 
-    display: inline-block; 
-    border-radius: 4px; 
-  }
-  
-  .crear a[href="subirFoto"]:hover {
-    background-color: #45a049; 
-  }
-  
-  /* Estilos para la tabla de productos */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #ccc;
-    
-    
-  }
-  
-  table, th, td {
-    border: 5px solid #ddd;
-  }
-  
-  th, td {
-    padding: 12px;
-    text-align: center;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  
-  /* Estilo para el formulario de registro */
-  form {
-    margin-top: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-  }
-  
-  input {
-    width: calc(100% - 20px); /* Ajuste para el ancho del borde */
-    padding: 10px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none; /* Elimina el contorno predeterminado del cuadro de entrada */
-  }
-  
-  input:focus {
-    border-color: #4CAF50; /* Cambia el color del borde al enfocar el cuadro de entrada */
-  }
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Estilo para el botón de borrado */
-  .delete-button {
-    background-color: #f44336;
-  }
-  
-  .delete-button:hover {
-    background-color: #d32f2f;
-  }
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+}
 
- 
+.crear a[href="subirFoto"]:hover {
+  background-color: #45a049;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #ccc;
+}
+
+table,
+th,
+td {
+  border: 5px solid #ddd;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+form {
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #4CAF50;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.delete-button {
+  background-color: #f44336;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
